@@ -2,7 +2,8 @@ const express = require('express'); // npm i express
 const router = express();
 // api npm // npm i axios
 
-const bodyParser = require("body-parser"); // npm i body-parser
+const bodyParser = require("body-parser");
+const axios = require("axios"); // npm i body-parser
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 
@@ -19,6 +20,11 @@ router.get('/*', (req, res) => {
     if (!url) return res.json({'code':'E001', 'msg':'유효하지 않은 요청입니다.'});
     url = `${url}${req.path}`;
     console.log(url);
+
+    axios.get(url).then(x => {
+        console.log(x.data);
+    })
+
 
     res.json({'code':'S001', 'url':url});
 })
