@@ -7,6 +7,11 @@ const axios = require("axios"); // npm i body-parser
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 
+router.use((req, res, next) => {
+    console.log('URL: ', req.url);
+    console.log('모든 경로 필터')
+})
+
 //테스트 라우터
 router.get('/test', (req, res) => {
     res.json({'code':'S001'});
